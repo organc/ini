@@ -1,6 +1,6 @@
-#include <stdio.h>
+#include <ini.h>
 
 int main(int argc, char** argv){
-    printf("hello world");
+    read_token();
     return 0;
 }
