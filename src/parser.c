@@ -10,7 +10,7 @@ int read_token(){
     char* content = "; ini 配置文件解析测试"                      "\n"
                     "mode = dev"                                "\n"
                     "port=80"                                   "\n"
-                    "host=192.168.1.11"                         "\n"
+                    "host=192.168.1.11    ; 主机地址"           "\n"
                     "[mysql]"                                   "\n"
                     "host=192.168.1.16"                         "\n"
                     "port=3306"                                 "\n"
@@ -101,6 +101,10 @@ void read_char(char c){
                 syntax_state = STAT_VALUE_STRING_BLOCK;
                 printf(COLOR_BLUE);
                 printf("%c",c);
+            }else if(c==';' || c=='#') {
+                syntax_state = STAT_VALUE_INLINE_COMMENT;
+                printf(COLOR_GREEN);
+                printf("%c",c);
             }else{
                 printf("%c",c);
             }
@@ -113,6 +117,17 @@ void read_char(char c){
                 printf("%c",c);
                 printf(COLOR_NONE);
             }else{
+                printf("%c",c);
+            }
+            break;
+        }
+        case STAT_VALUE_INLINE_COMMENT:
+        {
+            if (c=='\n'){
+                syntax_state = STAT_VALUE;
+                printf("%c",c);
+                printf(COLOR_NONE);
+            } else{
                 printf("%c",c);
             }
             break;
