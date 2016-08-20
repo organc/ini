@@ -124,7 +124,7 @@ void read_char(char c){
         case STAT_VALUE_INLINE_COMMENT:
         {
             if (c=='\n'){
-                syntax_state = STAT_VALUE;
+                syntax_state = STAT_NONE;
                 printf("%c",c);
                 printf(COLOR_NONE);
             } else{
