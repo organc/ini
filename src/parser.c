@@ -70,7 +70,7 @@ void read_char(char c){
         }
         case STAT_GROUP:
         {
-            if (c==']'){
+            if (c==']' || c=='\n'){
                 syntax_state = STAT_NONE;
                 printf("%c",c);
                 printf(COLOR_NONE);
